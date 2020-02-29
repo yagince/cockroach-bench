@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  cockroachdb_1:
+    image: cockroachdb/cockroach:v19.2.4
+    container_name: roach1
+    ports:
+      - 26257
+      - 8080
+    networks:
+      - roachnet
+    restart: always
+    command:
+      - start
+      - "--insecure"
+    volumes:
+      - "./tmp/cockroach-data/roach1:/cockroach/cockroach-data"
+networks:
+  roachnet:
+    driver: bridge
