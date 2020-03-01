@@ -1,7 +1,6 @@
 use crate::schema::users;
 use diesel::{
     pg::PgConnection,
-    prelude::*,
     r2d2::{self, ConnectionManager},
     Queryable,
 };
@@ -19,11 +18,6 @@ pub fn create_db_pool(size: u32) -> DbPool {
         .max_size(size)
         .build(ConnectionManager::<PgConnection>::new(database_url()))
         .expect("failed to create db connection pool")
-}
-
-pub fn establish_connection() -> PgConnection {
-    let database_url = database_url();
-    PgConnection::establish(&database_url).expect(&format!("Error connecting to {}", database_url))
 }
 
 #[derive(Debug, Clone, Queryable)]

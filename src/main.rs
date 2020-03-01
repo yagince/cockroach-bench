@@ -23,7 +23,6 @@ fn main() {
                 })
                 .get_result::<User>(&conn)
         });
-        println!("{:?}", user);
+        // println!("{:?}", user);
     });
-
 }

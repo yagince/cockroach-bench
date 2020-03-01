@@ -44,7 +44,6 @@ name = "cockroachdb_bench"
 version = "0.1.0"
 dependencies = [
  "diesel",
- "lazy_static",
  "r2d2",
  "rayon",
  "uuid",
