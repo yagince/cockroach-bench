@@ -1,4 +1,4 @@
-FROM rust:1.41.0-slim-buster
+FROM rust:1.41.1-slim-buster
 
 # ローカルのtargetディレクトリにビルドするとマウントしている時に遅くなるのでビルドディレクトリを変える
 ENV CARGO_TARGET_DIR=/tmp/target \

@@ -8,6 +8,8 @@ services:
       - .:/app
     depends_on:
       - cockroachdb_1
+      - cockroachdb_2
+      - cockroachdb_3
     command: cargo watch -x "run" -w src
     networks:
       - roachnet
@@ -71,4 +73,3 @@ services:
       - "./tmp/cockroach-data/roach3:/cockroach/cockroach-data"
 networks:
   roachnet:
-    driver: bridge

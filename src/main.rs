@@ -13,16 +13,18 @@ fn main() {
 
     let pool = models::create_db_pool(concurrency);
 
-    (1..=n).into_par_iter().for_each(|_|{
+    (1..=n).into_par_iter().for_each(|i|{
         let conn = pool.get().unwrap();
 
-        let user = conn.transaction(|| {
+        let ret = conn.transaction(|| {
             diesel::insert_into(schema::users::table)
                 .values(&NewUser {
                     name: "hoge".to_owned(),
                 })
                 .get_result::<User>(&conn)
         });
-        // println!("{:?}", user);
+        if let Err(e) = ret {
+            println!("{}: {:?}", i, e);
+        }
     });
 }
