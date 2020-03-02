@@ -11,10 +11,12 @@ fn main() {
 
     rayon::ThreadPoolBuilder::new().num_threads(concurrency as usize).build_global().unwrap();
 
-    let pool = models::create_db_pool(concurrency);
+    // let pool = models::create_db_pool(concurrency);
+    let pools = models::create_db_pools(concurrency);
 
     (1..=n).into_par_iter().for_each(|i|{
-        let conn = pool.get().unwrap();
+        // let conn = pool.get().unwrap();
+        let conn = pools.next().unwrap().get().unwrap();
 
         let ret = conn.transaction(|| {
             diesel::insert_into(schema::users::table)
